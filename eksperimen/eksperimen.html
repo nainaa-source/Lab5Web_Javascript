@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Eksperimen Mandiri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        section {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 { margin-top: 0; color: #333; }
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover { background-color: #0056b3; }
+        .error { color: red; font-size: 14px; }
+        table { border-collapse: collapse; width: 200px; margin-top: 10px; }
+        th, td { border: 1px solid #ccc; padding: 6px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <!-- Nomor 1: Latihan 3 dengan Prompt -->
+    <section>
+        <h2>1. Operasi Dasar dari Prompt</h2>
+        <button onclick="jalankanOperasiPrompt()">Jalankan Hitung Prompt</button>
+        <p><i>Lihat hasilnya di Console Browser (Tekan F12 -> Console)</i></p>
+    </section>
+
+    <!-- Nomor 7: Tabel Perkalian 7 -->
+    <section>
+        <h2>7. Tabel Perkalian Angka 7</h2>
+        <table id="tabelPerkalian">
+            <thead>
+                <tr><th>Operasi</th><th>Hasil</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <!-- Nomor 8: Cek Genap -->
+    <section>
+        <h2>8. Cek Angka Genap</h2>
+        <input type="number" id="inputAngka" placeholder="Masukkan angka">
+        <button onclick="ujiCekGenap()">Cek</button>
+        <p id="hasilCekGenap"></p>
+    </section>
+
+    <!-- Nomor 9: Validasi Form Tidak Boleh Kosong -->
+    <section>
+        <h2>9. Validasi Form Input</h2>
+        <form id="formInput" onsubmit="validasiForm(event)">
+            <label for="namaForm">Nama:</label>
+            <input type="text" id="namaForm" placeholder="Masukkan nama...">
+            <button type="submit">Kirim</button>
+            <p id="pesanErrorForm" class="error"></p>
+        </form>
+    </section>
+
+    <!-- Nomor 10: Daftar Menu Tambahan (Menu Resto) -->
+    <section>
+        <h2>10. Hitung Total Menu Makanan</h2>
+        <label><input type="checkbox" class="menu" value="5000"> Ayam Goreng - Rp5.000</label><br>
+        <label><input type="checkbox" class="menu" value="500"> Tempe - Rp500</label><br>
+        <label><input type="checkbox" class="menu" value="2500"> Telur Dadar - Rp2.500</label><br>
+        <!-- Tambahan 2 menu baru -->
+        <label><input type="checkbox" class="menu" value="3000"> Es Teh Manis - Rp3.000</label><br>
+        <label><input type="checkbox" class="menu" value="10000"> Nasi Goreng - Rp10.000</label><br>
+        <p><strong>Total: Rp<span id="totalMenu">0</span></strong></p>
+    </section>
+
+    <!-- Nomor 11: Sembunyikan / Tampilkan Elemen -->
+    <section>
+        <h2>11. Toggle Tampil/Sembunyi Elemen</h2>
+        <button onclick="toggleElemen()">Sembunyikan / Tampilkan Teks</button>
+        <p id="teksToggle" style="margin-top: 10px; padding: 10px; background-color: #e2e2e2;">
+            Ini adalah teks yang bisa disembunyikan atau ditampilkan.
+        </p>
+    </section>
+
+    <!-- KODE JAVASCRIPT -->
+    <script>
+        // ==========================================
+        // 1. Operasi Dasar Menggunakan Prompt
+        // ==========================================
+        function operasiDasar(a, b) {
+            console.log("=== Hasil Operasi Dasar ===");
+            console.log("Penjumlahan:", a + b);
+            console.log("Pengurangan:", a - b);
+            console.log("Perkalian:", a * b);
+            console.log("Pembagian:", b !== 0 ? a / b : "Tidak dapat dibagi nol");
+            console.log("Modulus:", a % b);
+        }
+
+        function jalankanOperasiPrompt() {
+            const input1 = prompt("Masukkan angka pertama:");
+            const input2 = prompt("Masukkan angka kedua:");
+
+            // Konversi nilai dari prompt menjadi number
+            const num1 = Number(input1);
+            const num2 = Number(input2);
+
+            if (input1 === null || input2 === null || input1.trim() === "" || input2.trim() === "" || Number.isNaN(num1) || Number.isNaN(num2)) {
+                alert("Input tidak valid! Harap masukkan angka.");
+            } else {
+                operasiDasar(num1, num2);
+                alert("Hasil operasi telah dicetak ke Console (F12)!");
+            }
+        }
+
+        // ==========================================
+        // 7. Tabel Perkalian Angka 7 (1 Sampai 10)
+        // ==========================================
+        function buatTabelPerkalian7() {
+            const tbody = document.querySelector("#tabelPerkalian tbody");
+            tbody.innerHTML = "";
+            for (let i = 1; i <= 10; i++) {
+                const row = `<tr><td>7 x ${i}</td><td>${7 * i}</td></tr>`;
+                tbody.innerHTML += row;
+            }
+        }
+        buatTabelPerkalian7();
+
+        // ==========================================
+        // 8. Function cekGenap(angka)
+        // ==========================================
+        function cekGenap(angka) {
+            return angka % 2 === 0;
+        }
+
+        function ujiCekGenap() {
+            const input = document.getElementById("inputAngka").value;
+            const angka = Number(input);
+            const hasilEl = document.getElementById("hasilCekGenap");
+
+            if (input.trim() === "" || isNaN(angka)) {
+                hasilEl.textContent = "Masukkan angka yang valid!";
+                hasilEl.style.color = "red";
+                return;
+            }
+
+            const isGenap = cekGenap(angka);
+            hasilEl.textContent = `Angka ${angka} adalah ${isGenap ? "GENAP (true)" : "GANJIL (false)"}`;
+            hasilEl.style.color = "green";
+        }
+
+        // ==========================================
+        // 9. Validasi Form Tidak Boleh Kosong
+        // ==========================================
+        function validasiForm(event) {
+            event.preventDefault(); // Mencegah form submit/refresh halaman
+            const inputNama = document.getElementById("namaForm").value;
+            const pesanError = document.getElementById("pesanErrorForm");
+
+            if (inputNama.trim() === "") {
+                pesanError.textContent = "Kolom nama tidak boleh kosong!";
+            } else {
+                pesanError.textContent = "";
+                alert("Form berhasil dikirim! Halo, " + inputNama);
+            }
+        }
+
+        // ==========================================
+        // 10. Tambahan Menu dan Perhitungan Total
+        // ==========================================
+        const daftarMenu = document.querySelectorAll(".menu");
+        daftarMenu.forEach((item) => {
+            item.addEventListener("change", hitungTotalMenu);
+        });
+
+        function hitungTotalMenu() {
+            let total = 0;
+            daftarMenu.forEach((item) => {
+                if (item.checked) {
+                    total += Number(item.value);
+                }
+            });
+            document.getElementById("totalMenu").textContent = total.toLocaleString("id-ID");
+        }
+
+        // ==========================================
+        // 11. Tombol Toggle Sembunyi / Tampil
+        // ==========================================
+        function toggleElemen() {
+            const elemen = document.getElementById("teksToggle");
+            if (elemen.style.display === "none") {
+                elemen.style.display = "block";
+            } else {
+                elemen.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
