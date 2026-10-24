@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praktikum JavaScript</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; transition: background-color 0.3s; }
+        section { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <!-- Pesan Utama -->
+    <section>
+        <h2>Pesan Utama</h2>
+        <p id="pesan">Memuat...</p>
+    </section>
+
+    <!-- Cek Bilangan Ganjil/Genap -->
+    <section>
+        <h2>Cek Bilangan</h2>
+        <label for="bilangan">Masukkan bilangan bulat:</label>
+        <input type="number" id="bilangan" step="1">
+        <button type="button" onclick="cekBilangan()">Periksa</button>
+        <p id="hasilBilangan"></p>
+    </section>
+
+    <!-- Ubah Warna Latar -->
+    <section>
+        <h2>Ubah Warna Latar</h2>
+        <button type="button" onclick="ubahWarnaLatar('lightgreen')">Latar Hijau</button>
+        <button type="button" onclick="ubahWarnaLatar('white')">Latar Putih</button>
+        <button type="button" onclick="ubahWarnaLatar('lightyellow')">Latar Kuning</button>
+    </section>
+
+    <!-- Kalkulator Sederhana Makanan -->
+    <section>
+        <h3>Daftar Menu Makanan</h3>
+        <label><input type="checkbox" class="menu" value="5000"> Ayam Goreng - Rp5.000</label><br>
+        <label><input type="checkbox" class="menu" value="500"> Tempe - Rp500</label><br>
+        <label><input type="checkbox" class="menu" value="2500"> Telur Dadar - Rp2.500</label><br>
+        <p>Total: Rp<span id="total">0</span></p>
+    </section>
+
+    <!-- Menghubungkan file JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
